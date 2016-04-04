@@ -1,0 +1,49 @@
+<form action="/teampicker" method="POST">
+<div>
+  <div class="container">
+    <textarea name="tp_names" style="width: 100%"/><%= @tp_names %></textarea>
+  </div>
+  <div class="container">
+    <div class="panel">
+      <% @tp_everyone_array.each do |namewithspace| %>
+        <% namewithoutspace = namewithspace.sub(" ", "_") %>
+        <input type="checkbox"
+                 id="<%= namewithoutspace %>"
+               name="<%= namewithoutspace %>"
+                 <%= "checked" if @tp_checked_people.include?namewithoutspace %>
+              value="checked"/>
+        <label for="<%= namewithoutspace %>"><%= namewithspace %></label><br />
+      <% end %>
+    </div>
+    <div class="panel">
+      <label>Method</label><br />
+
+      <input id="team" type="radio" name="tp_method" value="T" <%= "checked" if @tp_method == "T" %>          onclick="document.getElementById('lbl_number_label').innerText='Teams'"/>
+      <label for="team">Team Count</label><br />
+
+      <input id="number" type="radio" name="tp_method" value="N" <%= "checked" if @tp_method == "N" %> onclick="document.getElementById('lbl_number_label').innerText='Per Team'"/>
+      <label for="number">Number per team</label><br />
+
+      <input type="text" name="tp_number" value="<%= @tp_number %>" style="width: 40px"/>
+      <label id="lbl_number_label"><%= (@tp_method == "T")?"Teams":"Per Team" %></label><br />
+      <input type="submit" value="Generate teams" />
+    </div>
+    <div class="panel">
+      <% for teamIx in 0..(@tp_result.length - 1)  %>
+      <div>
+        <ul>
+          <label>Team <%= (teamIx + 1).to_s %></label>
+          <% for nameIx in 0..(@tp_result[teamIx].length - 1) %>
+          <li> <%= @tp_result[teamIx][nameIx] %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+
+</form>

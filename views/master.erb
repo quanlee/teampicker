@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title %></title>
+    <style>
+      .container{
+        width: 80%;
+        margin: 0 auto;
+      }
+      .panel{
+        width: 33%; 
+        display: inline-block;
+        float:left;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/listtasks">List</a>
+    |
+    <a href="/addtask">Add Task</a>
+    |
+    <a href="/teampicker">Team Picker</a>
+    <h1><%= @title %></h1>
+    <% if true %>
+    <%= yield%>
+    <% end %>
+  </body>
+</html>
